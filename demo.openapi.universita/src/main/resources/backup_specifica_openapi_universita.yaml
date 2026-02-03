@@ -1,0 +1,505 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /studenti:
+    get:
+      summary: Lista Studenti
+      description: Restituisce tutti gli Studenti
+      operationId: listaStudenti
+      responses:
+        '200':
+          description: Risposta con esito positivo e uno o piu Studenti trovati
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Studente"
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+    post:
+      summary: Crea Studente
+      description: "Creazione di uno Studente."
+      operationId: creaStudente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StudenteCreate"
+      responses:
+        '201':
+          description: "Risorsa creata: Studente"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Studente'
+        '400':
+            $ref: '#/components/responses/Risposta400'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+  /studenti/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Identificativo (ID) di un unico Studente
+        required: true
+        schema:
+          type: integer
+          format: int32
+    get:
+      summary: Cerca Studente
+      description: Restituisce uno Studente in base al suo ID
+      operationId: cercaStudente
+      responses:
+        '200':
+          description: "Risposta con esito positivo e lo Studente trovato"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studente"
+        '400':
+            $ref: '#/components/responses/Risposta400'
+        '404':
+          $ref: '#/components/responses/Risposta404'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+    put:
+      summary: Aggiorna Studente
+      description: Aggiorna i campi di uno Studente in base al suo ID
+      operationId: aggiornaStudente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studente"
+      responses:
+        '200':
+          description: "Risposta con esito positivo e lo Studente aggiornato"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studente"
+        '400':
+          $ref: '#/components/responses/Risposta400'
+        '404':
+          $ref: '#/components/responses/Risposta404'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+    delete:
+      summary: Cancella Studente
+      description: Cancella uno Studente in base al suo ID
+      operationId: cancellaStudente
+      responses:
+        '204':
+          description: Nessun contenuto
+        '400':
+          $ref: '#/components/responses/Risposta400'
+        '404':
+          $ref: '#/components/responses/Risposta404'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+  /docenti:
+    get:
+      summary: Lista Docenti
+      description: "Restituisce tutti gli Docenti"
+      operationId: listaDocenti
+      responses:
+        '200':
+          description: "Risposta con esito positivo e uno o piu Docenti trovati"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Docente"
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+    post:
+      summary: Crea Docenti
+      description: "Creazione di un Docente."
+      operationId: creaDocente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocenteCreate"
+      responses:
+        '201':
+          description: "Risorsa creata: Docente"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Docente'
+        '400':
+            $ref: '#/components/responses/Risposta400'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+  /docenti/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: "Identificativo (ID) di un unico Docente"
+        required: true
+        schema:
+          type: integer
+          format: int32
+    get:
+      summary: Cerca Docente
+      description: "Restituisce un Docente in base al suo ID"
+      operationId: cercaDocente
+      responses:
+        '200':
+          description: "Risposta con esito positivo ed il Docente trovato"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Docente"
+        '400':
+          $ref: '#/components/responses/Risposta400'
+        '404':
+          $ref: '#/components/responses/Risposta404'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+    put:
+      summary: Aggiorna Docente
+      description: Aggiorna i campi di un Docente in base al suo ID
+      operationId: aggiornaDocente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Docente"
+      responses:
+        '200':
+          description: "Risposta con esito positivo e il Docente aggiornato"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Docente"
+        '400':
+          $ref: '#/components/responses/Risposta400'
+        '404':
+          $ref: '#/components/responses/Risposta404'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+    delete:
+      summary: Cancella Docente
+      description: Cancella un Docente in base al suo ID
+      operationId: cancellaDocente
+      responses:
+        '204':
+          description: Nessun contenuto
+        '400':
+          $ref: '#/components/responses/Risposta400'
+        '404':
+          $ref: '#/components/responses/Risposta404'
+        default:
+          $ref: "#/components/responses/RispostaErroreImprevisto"
+components:
+  schemas:
+    Persona:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Sarà univoco in quanto chiave primaria (pk) nel database.
+          minimum: 0
+        nome:
+          type: string
+        cognome:
+          type: string
+        codiceFiscale:
+          type: string
+          description: |
+            Deve essere univoco. 
+            Codice che identifica una persona a livello nazionale in base a nome, cognome e data di nascita. 
+            E costruito secondo le seguenti regole: 16 caratteri, solo lettere A-Z e numeri 0-9 ordinati secondo le regole dell'agenzia delle entrate.
+          minLength: 16
+          maxLength: 16
+          pattern: ^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]
+        sesso:
+          type: string
+          enum:
+          - N
+          - F
+          - M
+          description: |
+            Deve essere 1 sola lettera. 
+            Puo avere solo 3 valori: N sta per neutro, F per femmina, M per maschio.
+      discriminator:
+        propertyName: tipo
+        mapping:
+          studente: '#/components/schemas/Studente'
+          docente: '#/components/schemas/Docente'
+      required:
+        - nome
+        - cognome
+        - codiceFiscale
+        - sesso
+      examples:
+      - id: 0
+        nome: Mario
+        cognome: Rossi
+        codiceFiscale: RSSMRA80A01H501U
+        sesso: M
+    Studente:
+      allOf:
+      - $ref: '#/components/schemas/Persona'
+      type: object
+      description: Eredita campi da Persona e ne aggiunge altri.
+      properties:
+        matricola:
+          type: string
+          description: |
+            Codice che identifica lo studente in modo univoco. 
+            Formato dalla lettera S seguito da 6 numeri.
+          pattern: ^S[0-9]{6}$
+          minLength: 7
+          maxLength: 7
+        corsoDiLaurea:
+          type: string
+          description: Nome del percorso universitario che lo studente sta seguendo.
+      required:
+        - matricola
+        - corsoDiLaurea
+      examples:
+      - id: 0
+        nome: Mario
+        cognome: Rossi
+        codiceFiscale: RSSMRA80A01H501U
+        sesso: M
+        matricola: S000000
+        corsoDiLaurea: Informatica
+    Docente:
+      allOf:
+      - $ref: '#/components/schemas/Persona'
+      type: object
+      description: Eredita campi da Persona e ne aggiunge altri.
+      properties:
+        matricola:
+          type: string
+          description: |
+            Codice che identifica il docente in modo univoco. 
+            Formato dalla lettera D seguito da 6 numeri.
+          pattern: ^D[0-9]{6}$
+          minLength: 7
+          maxLength: 7
+        anzianita:
+          type: integer
+          format: int32
+          description: Anni di servizio come docente. Massimo 30 anni.
+          minimum: 1
+          maximum: 30
+      required:
+        - matricola
+        - anzianita
+      examples:
+      - id: 0
+        nome: Mario
+        cognome: Rossi
+        codiceFiscale: RSSMRA80A01H501U
+        sesso: M
+        matricola: D000000
+        anzianita: 10
+    StudenteCreate:
+      allOf:
+        - type: object
+          description: Modello per la creazione di uno Studente
+          properties:
+            nome:
+              type: string
+            cognome:
+              type: string
+            codiceFiscale:
+              type: string
+              description: |
+                Deve essere univoco. 
+                Codice che identifica una persona a livello nazionale in base a nome, cognome e data di nascita. 
+                E costruito secondo le seguenti regole: 16 caratteri, solo lettere A-Z e numeri 0-9 ordinati secondo le regole dell'agenzia delle entrate.
+              minLength: 16
+              maxLength: 16
+              pattern: ^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]
+            sesso:
+              type: string
+              enum:
+              - N
+              - F
+              - M
+              description: |
+                Deve essere 1 sola lettera. 
+                Puo avere solo 3 valori: N sta per neutro, F per femmina, M per maschio.
+            matricola:
+              type: string
+              description: |
+                Codice che identifica lo studente in modo univoco. 
+                Formato dalla lettera S seguito da 6 numeri.
+              pattern: ^S[0-9]{6}$
+              minLength: 7
+              maxLength: 7
+            corsoDiLaurea:
+              type: string
+              description: Nome del percorso universitario che lo studente sta seguendo.
+          required:
+            - nome
+            - cognome
+            - codiceFiscale
+            - sesso
+            - matricola
+            - corsoDiLaurea
+      examples:
+      - nome: Mario
+        cognome: Rossi
+        codiceFiscale: RSSMRA80A01H501U
+        sesso: M
+        matricola: S000000
+        corsoDiLaurea: Informatica
+    DocenteCreate:
+      allOf:
+        - type: object
+          description: Modello per la creazione di un Docente.
+          properties:
+            nome:
+              type: string
+            cognome:
+              type: string
+            codiceFiscale:
+              type: string
+              description: |
+                Deve essere univoco. 
+                Codice che identifica una persona a livello nazionale in base a nome, cognome e data di nascita. 
+                E costruito secondo le seguenti regole: 16 caratteri, solo lettere A-Z e numeri 0-9 ordinati secondo le regole dell'agenzia delle entrate.
+              minLength: 16
+              maxLength: 16
+              pattern: ^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]
+            sesso:
+              type: string
+              enum:
+              - N
+              - F
+              - M
+              description: |
+                Deve essere 1 sola lettera. 
+                Puo avere solo 3 valori: N sta per neutro, F per femmina, M per maschio.
+            matricola:
+              type: string
+              description: |
+                Codice che identifica il docente in modo univoco. 
+                Formato dalla lettera D seguito da 6 numeri.
+              pattern: ^D[0-9]{6}$
+              minLength: 7
+              maxLength: 7
+            anzianita:
+              type: integer
+              format: int32
+              description: Anni di servizio come docente. Massimo 30 anni.
+              minimum: 1
+              maximum: 30
+          required:
+            - nome
+            - cognome
+            - codiceFiscale
+            - sesso
+            - matricola
+            - anzianita
+      examples:
+        - nome: Mario
+          cognome: Rossi
+          codiceFiscale: RSSMRA80A01H501U
+          sesso: M
+          matricola: D000000
+          anzianita: 10
+    ErroreImprevisto:
+      description: Errore generico
+      type: object
+      properties:
+        messaggio:
+            description: "Messaggio di errore parlante"
+            type: string
+        dettaglio:
+            description: "Dettaglio tecnico dell'errore (print stack trace)"
+            type: string
+      required:
+        - messaggio
+  responses:
+    Risposta400:
+      description: Richiesta incompleta o errata
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Parametro 'ID' non valido. Campo obbligatorio"
+            descrizione: "Bad Request"
+    Risposta401:
+      description: Autenticazione richiesta (login non presente o non valida)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Effettuare la login e riprovare"
+            descrizione: "Unauthorized"
+    Risposta403:
+      description: Non si hanno i permessi per accedere a questa risorsa (autorizzazioni)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Operazione non consentita per l'utente corrente"
+            descrizione: "Forbidden"
+    Risposta404:
+      description: Risorsa non trovata
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Risorsa non trovata"
+            descrizione: "Not Found"
+    Risposta405:
+      description: Metodo non consentito
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Metodo HTTP non supportato"
+            descrizione: "Method Not Allowed"
+    Risposta500:
+      description: Errore interno del server
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Qualcosa è andato storto"
+            descrizione: "Internal Server Error"
+    Risposta501:
+      description: Metodo non ancora implementato
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Metodo non ancora implementato"
+            descrizione: "Not Implemented"
+    RispostaErroreImprevisto:
+      description: Errore generico
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErroreImprevisto'
+          example:
+            messaggio: "Errore generico"
+            descrizione: "Internal Server Error"
